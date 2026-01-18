@@ -44,3 +44,4 @@
 build/
 build-msvc/
 build-mingw/
+.vscode/
