@@ -4,6 +4,8 @@
 # Explicitly declare source files
 *.cpp text eol=lf
 *.hpp text eol=lf
+*.c text eol=lf
+*.h text eol=lf
 
 # Denote files that should not be modified.
 *.odt binary
