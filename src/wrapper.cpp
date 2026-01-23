@@ -22,16 +22,24 @@ namespace NKLZ4 {
     Wrapper::~Wrapper() {
     }
 
-    Wrapper::compress(const std::string& in) {
+    template <typename DecompT, typename CompT>
+    Wrapper::compress(std::string const& in) {
         // Implement compression logic using LZ4 library
         return std::vector<char>();
     }
 
+    template <typename DecompT, typename CompT>
+    Wrapper<DecompT, CompT>::compress(std::unique_ptr<CompT> const& in) {
+
+    }
+
+    template <typename DecompT, typename CompT>
     Wrapper::decompress(const std::vector<char>& in) {
         // Implement decompression logic using LZ4 library
         return std::string();
     }
 
+    template <typename DecompT, typename CompT>
     Wrapper::decompress(const std::vector<char> const& in, std::string& out) {
         // Implement decompression logic using LZ4 library
     }

@@ -13,11 +13,12 @@ include(FetchContent)
 enable_testing()
 
 # LZ4 Dependency
-find_package(lz4 QUIET)
+find_package(lz4 1.10.0 QUIET)
 if (NOT lz4_FOUND)
-    if (EXISTS "other/lz4/build/cmake/CMakeLists.txt")
+    if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/other/lz4/build/cmake/CMakeLists.txt")
         message(STATUS "Building other/lz4...")
-        add_subdirectory(other/lz4)
+        add_subdirectory(other/lz4/build/cmake)
+        set(lz4_FOUND true)
     else()
         message(STATUS "other/lz4 not found. Building from git...")
         # if(MSVC)
@@ -41,18 +42,13 @@ else()
     message(STATUS "Found system lz4 installation")
 endif()
 
-# TODO: If not present and build using FetchContent, lz4 is stored in <build_dir>/_deps/lz4-src (or lz4?)
-# So if cmake -B build-msvc -S . is used, lz4 artifacts will be in build-msvc/_deps/lz4-src
-# lz4_static will reference this path, so include and library linking should work automatically
-# The local dependency will build in
-# TODO: We should also do a search for lz4 in the OS or user paths before fetching or building locally
-
 # GTest Dependency
-find_package(googletest QUIET)
+find_package(googletest 1.17.0 QUIET)
 if (NOT googletest_FOUND)
-    if (EXISTS "other/googletest/CMakeLists.txt")
+    if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/other/googletest/CMakeLists.txt")
         message(STATUS "Building other/googletest...")
         add_subdirectory(other/googletest)
+        set (googletest_FOUND true)
     else()
         message(STATUS "other/googletest not found. Downloading via git...")
         FetchContent_Declare(
